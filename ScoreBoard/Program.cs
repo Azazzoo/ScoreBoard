@@ -5,10 +5,13 @@ using ScoreBoard.ViewModels;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddDbContext<CatalogueDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration["ConnectionStrings:CatalogueGateauxDbContextConnection"]);
 });
+builder.Services.AddScoped<IJoueurRepository,DBJoueurRepository>();
+builder.Services.AddScoped<IJeuRepository,DBJeuRepository>();
 
 var app = builder.Build();
 
@@ -21,7 +24,7 @@ app.UseStaticFiles();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
+    pattern: "{controller=Joueur}/{action=Index}/{id?}");
 
 InitialisateurBD.Seed(app);
 

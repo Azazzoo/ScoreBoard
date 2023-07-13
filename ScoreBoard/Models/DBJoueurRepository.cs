@@ -5,7 +5,7 @@ namespace ScoreBoard.Models
     public class DBJoueurRepository : IJoueurRepository
     {
         private readonly CatalogueDbContext _catalogueDbContext;
-        public IEnumerable<Joueur> _MesJoueurs { get { return _catalogueDbContext.Joueurs.Include(i => i.Nom).OrderBy(g => g.Nom).ToList(); } }
+        public IEnumerable<Joueur> _MesJoueurs { get { return _catalogueDbContext.Joueurs.Include(i => i.Jeux).OrderBy(g => g.Nom).ToList(); } }
 
         public DBJoueurRepository(CatalogueDbContext catalogueDbContext)
         {
@@ -14,7 +14,7 @@ namespace ScoreBoard.Models
 
         public Joueur? GetJoueur(int id)
         {
-            Joueur joueur = _catalogueDbContext.Joueurs.Include(j => j.Id).FirstOrDefault(g => g.Id == id);
+            Joueur joueur = _catalogueDbContext.Joueurs.Include(j => j.Jeux).FirstOrDefault(g => g.Id == id);
             return joueur;
         }
 

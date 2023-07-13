@@ -5,6 +5,7 @@ namespace ScoreBoard.Models
     public class DBJeuRepository : IJeuRepository
     {
         private readonly CatalogueDbContext _catalogueDbContext;
+
         public IEnumerable<Jeu> _MesJeux { get { return _catalogueDbContext.Jeux.Include(j => j.Nom).OrderBy(g => g.Nom).ToList(); } }
 
         public DBJeuRepository(CatalogueDbContext catalogueDbContext)

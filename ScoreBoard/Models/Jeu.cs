@@ -13,7 +13,7 @@ namespace ScoreBoard.Models
         [Required]
         public string Description { get; set; }
         [Required]
-        public int JoueurId { get; set; }
+        public int? JoueurId { get; set; }
         [Required]
         public Joueur Joueur { get; set; }
         [Required]
